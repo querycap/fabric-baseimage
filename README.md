@@ -1,3 +1,10 @@
+# multiarch
+
+```bash
+# make multi-arch
+make docker DOCKER_NS=querycapfabric BASE_DOCKER_NS=querycapfabric
+```
+
 # :warning: Deprecation Notice
 
 The Fabric-Baseimage repository and the images built from this repository are deprecated. Critical bugs will continue to be patched through the Fabric 1.4.x LTS lifecycle. The images affected by this deprecation are:
