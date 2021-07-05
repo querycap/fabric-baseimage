@@ -30,14 +30,15 @@ export GOROOT="/opt/go"
 # Install Golang
 # ----------------------------------------------------------------
 mkdir -p $GOPATH
-ARCH=`uname -m | sed 's|i686|386|' | sed 's|x86_64|amd64|'`
-BINTARGETS="x86_64 ppc64le s390x"
+ARCH=`uname -m | sed 's|i686|386|' | sed 's|x86_64|amd64|' | sed 's|aarch64|arm64|'`
+BINTARGETS="x86_64 ppc64le s390x aarch64"
 GO_VER=1.14.12
 
 # Install Golang binary if found in BINTARGETS
 if echo $BINTARGETS | grep -q `uname -m`; then
    cd /tmp
-   wget --quiet --no-check-certificate https://storage.googleapis.com/golang/go${GO_VER}.linux-${ARCH}.tar.gz
+   #wget --quiet --no-check-certificate https://storage.googleapis.com/golang/go${GO_VER}.linux-${ARCH}.tar.gz
+   wget --quiet --no-check-certificate https://golang.org/dl/go${GO_VER}.linux-${ARCH}.tar.gz
    tar -xvf go${GO_VER}.linux-${ARCH}.tar.gz
    mv go $GOROOT
    chmod 775 $GOROOT
@@ -67,10 +68,10 @@ EOF
 # ----------------------------------------------------------------
 # Install NodeJS
 # ----------------------------------------------------------------
-NODE_VER=8.16.1
+NODE_VER=8.17.0
 NPM_VER=6.11.3
 
-ARCH=`uname -m | sed 's|i686|x86|' | sed 's|x86_64|x64|'`
+ARCH=`uname -m | sed 's|i686|x86|' | sed 's|x86_64|x64|' | sed 's|aarch64|arm64|'`
 NODE_PKG=node-v$NODE_VER-linux-$ARCH.tar.gz
 SRC_PATH=/tmp/$NODE_PKG
 

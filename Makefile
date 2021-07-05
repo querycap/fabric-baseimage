@@ -58,9 +58,8 @@ build/docker/%/$(DUMMY):
 	$(eval DOCKER_NAME = $(BASENAME)-$(TARGET))
 	@mkdir -p $(@D)
 	@echo "Building docker $(TARGET)"
-	docker build -f config/$(TARGET)/Dockerfile \
-		-t $(DOCKER_NAME) \
-		-t $(DOCKER_NAME):$(DOCKER_TAG) \
+	docker buildx build --push --platform=linux/arm64,linux/amd64 -f config/$(TARGET)/Dockerfile \
+		-t $(DOCKER_NAME):$(VERSION) \
 		.
 	@touch $@
 
